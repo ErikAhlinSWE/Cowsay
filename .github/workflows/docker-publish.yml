@@ -10,14 +10,14 @@
 
 name: Eriks Docker image Creation
 
-#tigger AWS
+# tigger AWS
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
-#phases AWS
+# phases AWS
 jobs:
 
   build:

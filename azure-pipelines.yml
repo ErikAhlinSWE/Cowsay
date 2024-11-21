@@ -3,17 +3,30 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# on Github
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+    vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+# phases AWS
+stages:
+  - stage: Build
+    displayName: Build image
+    jobs:
+    - job: Build
+      displayName: Build
+      pool:
+        vmImage: ubuntu-latest
+      steps:
+      - task: CmdLine@2
+        inputs:
+          script: |
+            docker build -t git.systementor.se/ahlin.erik/test1120azure .
+            docker login -u ahlin.erik -p yacloud1 https://git.systementor.se
+            docker push git.systementor.se/ahlin.erik/test1120azure 
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+#      env:
+#        DOCKER_USERNAME: $(DOCKER_USERNAME)
+#        DOCKER_PASSWORD: $(DOCKER_PASSWORD)
