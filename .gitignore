@@ -1,1 +1,1 @@
-docker-publish.yml
+workflows/docker-publish.yml
