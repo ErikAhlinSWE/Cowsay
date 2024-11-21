@@ -1,24 +1,19 @@
-FROM golang:alpine AS builder
-# Installera GO
-# kompilera vår kod -> EXE-fil
+FROM golang:1.23.2-alpine
+# INSTALLERA GO
+# komppilera vår kod -> EXE-fil
 # kör EXE-fil
 
-RUN apk update && apk aa --no-cache git
-WORKDIR $GOPATH/scr/mypackage/myappp/
 COPY . .
-
 RUN go get -d -v
+RUN go build -o /app/cmd/main
 
-RUN go build -o /app/cmd/cowsay
-FROM scratch
+# EXPOSE 8080 
 
-COPY --from=builder /app/cmd/cowsay /cowsay
-COPY *.yaml ./
+ENTRYPOINT [ "/app/cmd/main" ]
 
-EXPOSE 8080
-
-ENTRYPOINT [ "/cowsay" ]
-# Körs när containern kickar igång
-
-
-
+# innehåller intruktioner för att skapa en CONTAINER IMAGE
+# 1. Ta en tom Windows
+# 2. Ladda ner C-runtime
+# 3. Ladda ner Java v8
+# 4. Ta min zio.fil och kiopera in på c:\bla\bla
+# 5. Kör c:\bla\bla\aaa.exe
