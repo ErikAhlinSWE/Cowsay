@@ -27,6 +27,7 @@ stages:
             docker login -u ahlin.erik -p yacloud1 https://git.systementor.se
             docker push git.systementor.se/ahlin.erik/test1120azure 
 
+#           docker login -u $env:DOCKER_USERNAME -p $env:DOCKER_PASSWORD https://git.systementor.se
 #      env:
 #        DOCKER_USERNAME: $(DOCKER_USERNAME)
 #        DOCKER_PASSWORD: $(DOCKER_PASSWORD)
